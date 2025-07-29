@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Quiz Results - Quiz Platform</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/dashboard">Quiz Platform</a>
+        <div class="navbar-nav ms-auto">
+          <span class="navbar-text me-3" sec:authentication="name"
+            >Welcome!</span
+          >
+          <form th:action="@{/logout}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-outline-light">Logout</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card shadow">
+            <div class="card-header">
+              <h2 class="mb-0">Quiz Results</h2>
+            </div>
+            <div class="card-body text-center">
+              <h3 class="mb-4" th:text="${quiz.title}">Quiz Title</h3>
+
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card bg-primary text-white">
+                    <div class="card-body">
+                      <h4 class="card-title">Score</h4>
+                      <h2
+                        class="mb-0"
+                        th:text="${#numbers.formatDecimal(score, 1, 1)} + '%'"
+                      >
+                        85%
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card bg-success text-white">
+                    <div class="card-body">
+                      <h4 class="card-title">Correct</h4>
+                      <h2
+                        class="mb-0"
+                        th:text="${correctAnswers} + '/' + ${totalQuestions}"
+                      >
+                        8/10
+                      </h2>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card bg-info text-white">
+                    <div class="card-body">
+                      <h4 class="card-title">Total</h4>
+                      <h2 class="mb-0" th:text="${totalQuestions}">10</h2>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <div th:if="${score >= 80}" class="alert alert-success">
+                  <h4>🎉 Excellent! Great job!</h4>
+                  <p>
+                    You've demonstrated a strong understanding of the material.
+                  </p>
+                </div>
+                <div
+                  th:if="${score >= 60 && score < 80}"
+                  class="alert alert-warning"
+                >
+                  <h4>👍 Good work!</h4>
+                  <p>
+                    You've shown a solid understanding with room for
+                    improvement.
+                  </p>
+                </div>
+                <div th:if="${score < 60}" class="alert alert-danger">
+                  <h4>📚 Keep learning!</h4>
+                  <p>
+                    Review the material and try again. Practice makes perfect!
+                  </p>
+                </div>
+              </div>
+
+              <div class="mt-4">
+                <a href="/candidate/quizzes" class="btn btn-primary"
+                  >Take Another Quiz</a
+                >
+                <a href="/dashboard" class="btn btn-secondary"
+                  >Back to Dashboard</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

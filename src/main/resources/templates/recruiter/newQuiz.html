@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Create Quiz - Quiz Platform</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/dashboard">Quiz Platform</a>
+        <div class="navbar-nav ms-auto">
+          <span class="navbar-text me-3" sec:authentication="name"
+            >Welcome!</span
+          >
+          <form th:action="@{/logout}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-outline-light">Logout</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <div class="row justify-content-center">
+        <div class="col-md-8">
+          <div class="card shadow">
+            <div class="card-body">
+              <h2 class="card-title mb-4">Create New Quiz</h2>
+
+              <form
+                th:action="@{/recruiter/quizzes}"
+                method="post"
+                th:object="${quiz}"
+              >
+                <div class="mb-3">
+                  <label for="title" class="form-label">Quiz Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="title"
+                    th:field="*{title}"
+                    required
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="description" class="form-label"
+                    >Description</label
+                  >
+                  <textarea
+                    class="form-control"
+                    id="description"
+                    th:field="*{description}"
+                    rows="3"
+                  ></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="durationInMinutes" class="form-label"
+                    >Duration (minutes)</label
+                  >
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="durationInMinutes"
+                    th:field="*{durationInMinutes}"
+                    min="1"
+                    max="180"
+                    required
+                  />
+                </div>
+                <div class="d-flex gap-2">
+                  <button type="submit" class="btn btn-success">
+                    Create Quiz
+                  </button>
+                  <a href="/recruiter/quizzes" class="btn btn-secondary"
+                    >Cancel</a
+                  >
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

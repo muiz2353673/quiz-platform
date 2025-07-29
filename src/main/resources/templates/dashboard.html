@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Dashboard - Quiz Platform</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+        <a class="navbar-brand" href="/dashboard">
+          <span>🎯 Quiz Platform</span>
+        </a>
+        <div class="navbar-nav ms-auto">
+          <span class="navbar-text me-3" sec:authentication="name">
+            Welcome!
+          </span>
+          <form th:action="@{/logout}" method="post" class="d-inline">
+            <button type="submit" class="btn btn-outline-light">
+              <span>Logout</span>
+            </button>
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mt-5">
+      <!-- Header -->
+      <div class="text-center mb-4">
+        <h1>Welcome to Quiz Platform</h1>
+        <p>Your gateway to knowledge assessment</p>
+      </div>
+
+      <div class="row">
+        <div class="col-12">
+          <!-- Recruiter Section -->
+          <div sec:authorize="hasRole('ROLE_RECRUITER')" class="card mb-4">
+            <div class="card-header">
+              <h3>🎯 Recruiter Dashboard</h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card mb-3">
+                    <div class="card-body text-center">
+                      <div class="h1">📊</div>
+                      <div class="h5">Manage Quizzes</div>
+                      <p class="mt-3">Create, edit, and manage your quizzes</p>
+                      <a href="/recruiter/quizzes" class="btn btn-primary">
+                        <span>View Quizzes</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card mb-3">
+                    <div class="card-body text-center">
+                      <div class="h1">✨</div>
+                      <div class="h5">Create New Quiz</div>
+                      <p class="mt-3">Create a new quiz for candidates</p>
+                      <a href="/recruiter/quizzes/new" class="btn btn-success">
+                        <span>Create Quiz</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card mb-3">
+                    <div class="card-body text-center">
+                      <div class="h1">📈</div>
+                      <div class="h5">View Results</div>
+                      <p class="mt-3">Analyze candidate performance</p>
+                      <a href="/recruiter/quizzes" class="btn btn-info">
+                        <span>View Results</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Candidate Section -->
+          <div sec:authorize="hasRole('ROLE_CANDIDATE')" class="card mb-4">
+            <div class="card-header">
+              <h3>🧠 Candidate Dashboard</h3>
+            </div>
+            <div class="card-body">
+              <div class="row">
+                <div class="col-md-4">
+                  <div class="card mb-3">
+                    <div class="card-body text-center">
+                      <div class="h1">📝</div>
+                      <div class="h5">Take Quizzes</div>
+                      <p class="mt-3">Browse and take available quizzes</p>
+                      <a href="/candidate/quizzes" class="btn btn-primary">
+                        <span>Browse Quizzes</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card mb-3">
+                    <div class="card-body text-center">
+                      <div class="h1">📋</div>
+                      <div class="h5">My Submissions</div>
+                      <p class="mt-3">View your quiz submissions</p>
+                      <a
+                        href="/candidate/submissions"
+                        class="btn btn-secondary"
+                      >
+                        <span>View Submissions</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-4">
+                  <div class="card mb-3">
+                    <div class="card-body text-center">
+                      <div class="h1">📊</div>
+                      <div class="h5">My Results</div>
+                      <p class="mt-3">Check your quiz results</p>
+                      <a href="/candidate/results" class="btn btn-info">
+                        <span>View Results</span>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
