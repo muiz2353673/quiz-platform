@@ -526,13 +526,6 @@ For support and questions:
 - Check the troubleshooting section above
 - Review the application logs
 
-## 🔄 Version History
-
-- **v1.0.0**: Initial release with basic quiz functionality
-- **v1.1.0**: Added user authentication and role-based access
-- **v1.2.0**: Enhanced UI with Bootstrap and responsive design
-- **v1.3.0**: Improved error handling and validation
-
 ## 🎓 Learning Resources
 
 ### Spring Boot
