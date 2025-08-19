@@ -133,7 +133,7 @@ Before running this application, ensure you have:
 #### 1. Clone the Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/muiz2353673/quiz-platform.git
 cd quiz-platform
 ```
 
